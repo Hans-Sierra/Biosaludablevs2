@@ -1,3 +1,5 @@
+# Laravel E-Commerce Application
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
@@ -7,53 +9,108 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Acerca de la Aplicación
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Esta es una plataforma de comercio electrónico (E-Commerce) desarrollada sobre el framework **Laravel**, aprovechando su sintaxis elegante y expresiva para construir un sistema robusto, seguro y escalable.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+La aplicación incluye características esenciales para el comercio digital, tales como:
+- Gestión de catálogo de productos, categorías y stock.
+- Carrito de compras e integración de pasarela de pagos.
+- Sistema de autenticación de usuarios y administración de pedidos.
+- Arquitectura basada en migraciones de base de datos robustas y un ORM intuitivo (Eloquent).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## Requisitos Previos
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Antes de comenzar con la instalación en tu entorno local, asegúrate de cumplir con los siguientes requisitos:
+- **PHP** (Versión >= 8.2 recomendada)
+- **Composer** (Gestor de dependencias de PHP)
+- **Node.js** & **NPM** (Para la gestión y compilación de recursos del Frontend)
+- **Motor de Base de Datos** (PostgreSQL, MySQL o SQL Server)
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## Instalación y Configuración en Local
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Sigue paso a paso estas instrucciones para clonar el repositorio, configurar el entorno y poner en marcha la aplicación:
 
-### Premium Partners
+### 1. Clonar el Repositorio
+Descarga el código fuente del proyecto en tu máquina local:
+```bash
+git clone <URL_DE_TU_REPOSITORIO>
+cd <NOMBRE_DE_LA_CARPETA_DEL_PROYECTO>
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 2. Instalar Dependencias de PHP
+Instala los paquetes y librerías necesarias para el backend utilizando Composer:
+```bash
+composer install
+```
 
-## Contributing
+### 3. Instalar y Compilar Recursos de Frontend
+Instala los módulos de Node y compila las hojas de estilo y scripts de JavaScript de la aplicación (Vite):
+```bash
+npm install
+npm run build
+```
+> 💡 *Nota de Desarrollo:* Si planeas realizar cambios en tiempo real en las vistas o componentes de JavaScript, utiliza el servidor de desarrollo de frontend ejecutando: `npm run dev`
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### 4. Configurar el Archivo de Entorno (`.env`)
+Copia el archivo de plantilla de entorno para crear tu configuración localizada:
+```bash
+cp .env.example .env
+```
 
-## Code of Conduct
+Abre el archivo `.env` en tu editor de código y configura los parámetros de conexión para tu base de datos y la URL de la app:
+```env
+APP_NAME="Laravel E-Commerce"
+APP_ENV=local
+APP_URL=http://127.0.0.1:8000
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+DB_CONNECTION=pgsql
+DB_HOST=127.0.0.1
+DB_PORT=5432
+DB_DATABASE=nombre_de_tu_base_de_datos
+DB_USERNAME=tu_usuario
+DB_PASSWORD=tu_contraseña
+```
 
-## Security Vulnerabilities
+### 5. Generar la Clave de la Aplicación
+Crea la clave única de encriptación requerida por Laravel para asegurar las sesiones y datos cifrados de los usuarios:
+```bash
+php artisan key:generate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 6. Ejecutar Migraciones y Seeders
+Crea la estructura de tablas necesarias en la base de datos. Si el proyecto cuenta con registros base de prueba (como roles, categorías o productos iniciales), puedes agregar la bandera de seeding:
+```bash
+php artisan migrate --seed
+```
 
-## License
+### 7. Crear el Enlace Simbólico de Almacenamiento
+Para asegurar que las imágenes de los productos cargadas desde el panel de administración sean visibles públicamente en la tienda, genera el enlace hacia el directorio `public`:
+```bash
+php artisan storage:link
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 8. Iniciar el Servidor de Desarrollo
+Con todo configurado, levanta el servidor local de Laravel:
+```bash
+php artisan serve
+```
+
+La aplicación estará disponible de forma inmediata en tu navegador web a través de la dirección: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
+
+## Características de Laravel Utilizadas
+
+- **Routing Engine:** Enrutamiento rápido y limpio para el catálogo y pasarelas de pago.
+- **Eloquent ORM:** Modelado de datos intuitivo para productos, órdenes y clientes.
+- **Database Migrations:** Control de versiones agnóstico para la base de datos de la tienda.
+- **Robust Background Jobs:** Procesamiento de colas en segundo plano para el envío de correos de confirmación de facturas y estados de compra.
+
+## Licencia
+
+El framework Laravel es software de código abierto licenciado bajo la [Licencia MIT](https://opensource.org/licenses/MIT). La lógica de negocio de este e-commerce se rige bajo sus propios términos de contribución.

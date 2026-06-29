@@ -3,8 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MedicamentoController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 
+Route::post('/medicamentos',[MedicamentoController::class,'store'])->name('medicamentos.store');
